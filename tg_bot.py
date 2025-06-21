@@ -8,7 +8,11 @@ from telegram import BotCommand
 import faiss
 import numpy as np
 import pandas as pd
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+TOKEN = os.getenv("BOT_TOKEN")
 
 df = pd.read_pickle(r"C:\my_projects\rag-movie-recommender\movies_with_embeddings.pkl")
 model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
@@ -110,7 +114,7 @@ async def more_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 if __name__ == '__main__':
-    app = ApplicationBuilder().token("7909924378:AAHmguToHsEyRAJS5qihCCDV91Ww8-RxMjE").build()
+    app = ApplicationBuilder().token(TOKEN).build()
 
     # меню команд 
     async def setup_commands():
