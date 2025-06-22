@@ -25,7 +25,7 @@ index.add(np.vstack(df['embedding'].values))
 def search_similar_movies(query, shown_indices=set(), top_k=5):
     lang = detect(query)
 
-    # Перевод запроса на английский, если он не на английском
+    # перевод запроса на английский, если он не на английском
     if lang != 'en':
         try:
             translated_query = GoogleTranslator(source='auto', target='en').translate(query)
@@ -90,7 +90,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(answer, parse_mode="Markdown", reply_markup=keyboard)
 
 # кнопка "Ещё"
-# 🔁 Обработка кнопки "Ещё"
 async def more_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = context.user_data.get('query')
     shown = set(context.user_data.get('shown_indices', []))
@@ -108,7 +107,6 @@ async def more_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("Ещё 5 фильмов", callback_data="more")]
     ])
     
-    # ⬅️ ВАЖНО: используем send_message вместо edit_message_text
     await update.effective_chat.send_message(answer, parse_mode="Markdown", reply_markup=keyboard)
 
 
